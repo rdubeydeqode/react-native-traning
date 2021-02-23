@@ -1,114 +1,60 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {Screens} from './app/navigation/ScreenNames';
+import TabOneScreen1 from './app/screens/TabOneScreen1';
+import TabOneScreen2 from './app/screens/TabOneScreen2';
+import TabOneScreen3 from './app/screens/TabOneScreen3';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
-const App: () => React$Node = () => {
+function IndexOneStack() {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <Stack.Navigator initialRouteName={Screens.TAB_ONE_SCREEN_1}>
+      <Stack.Screen name={Screens.TAB_ONE_SCREEN_1} component={TabOneScreen1} />
+    </Stack.Navigator>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
+function IndexTwoStack() {
+  return (
+    <Stack.Navigator initialRouteName={Screens.TAB_ONE_SCREEN_2}>
+      <Stack.Screen name={Screens.TAB_TWO_SCREEN_2} component={TabOneScreen2} />
+    </Stack.Navigator>
+  );
+}
+
+function IndexThreeStack() {
+  return (
+    <Stack.Navigator initialRouteName={Screens.TAB_ONE_SCREEN_3}>
+      <Stack.Screen name={Screens.TAB_ONE_SCREEN_3} component={TabOneScreen3} />
+    </Stack.Navigator>
+  );
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName={Screens.TAB_ONE_SCREEN_1}>
+          <Drawer.Screen
+            name={Screens.TAB_ONE_SCREEN_1}
+            component={IndexOneStack}
+          />
+          <Drawer.Screen
+            name={Screens.TAB_ONE_SCREEN_2}
+            component={IndexTwoStack}
+          />
+          <Drawer.Screen
+            name={Screens.TAB_ONE_SCREEN_3}
+            component={IndexThreeStack}
+          />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    );
+  }
+}
 
 export default App;
