@@ -1,23 +1,20 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import {Colors} from '../constants/Color';
 import {Dimensions} from '../constants/Dimensions';
 import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
 import {Screens} from '../navigation/ScreenNames';
 
-const TabOneScreen1 = () => {
+const TabOneScreen3 = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <Button
-        title={CommonLocalizeStrings.go_to_screen_tw0}
-        onPress={() => navigation.navigate(Screens.TAB_ONE_SCREEN_2)}
+        title={CommonLocalizeStrings.go_to_screen_one}
+        onPress={() => navigation.navigate(Screens.DRAWER_SCREEN_1)}
       />
-      <Text style={styles.messageText}>
-        {CommonLocalizeStrings.tab_one_screen1}
-      </Text>
     </View>
   );
 };
@@ -40,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TabOneScreen1;
+export default TabOneScreen3;
