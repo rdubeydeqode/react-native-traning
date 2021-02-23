@@ -15,6 +15,11 @@ const HomeScreen = () => {
         title={CommonLocalizeStrings.go_to_list}
         onPress={() => navigation.navigate(Screens.LIST)}
       />
+
+      <Button
+        title={CommonLocalizeStrings.go_to_section_list}
+        onPress={() => navigation.navigate(Screens.SECTION_LIST)}
+      />
     </View>
   );
 };
