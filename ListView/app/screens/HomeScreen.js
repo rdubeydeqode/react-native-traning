@@ -1,31 +1,23 @@
-import React, {Component} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 import {Colors} from '../constants/Color';
 import {Dimensions} from '../constants/Dimensions';
 import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
 import {Screens} from '../navigation/ScreenNames';
 
-class HomeScreen extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Button
-          title={CommonLocalizeStrings.go_to_products}
-          onPress={() =>
-            this.props.navigation.navigate(Screens.PRODUCT, {
-              message: CommonLocalizeStrings.food_factory,
-            })
-          }
-        />
+const HomeScreen = () => {
+  const navigation = useNavigation();
 
-        <Button
-          title={CommonLocalizeStrings.go_to_tab}
-          onPress={() => this.props.navigation.navigate(Screens.TAB)}
-        />
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <Button
+        title={CommonLocalizeStrings.go_to_list}
+        onPress={() => navigation.navigate(Screens.LIST)}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   headerText: {
