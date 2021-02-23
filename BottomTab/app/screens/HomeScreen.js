@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
-import { COLORS } from '../constants/Color';
-import { DIMENSIONS } from '../constants/Dimensions';
-import { STRINGS } from '../constants/String';
-import { SCREENS } from '../navigation/ScreenNames';
+import React, {Component} from 'react';
+import {Button, StyleSheet, View} from 'react-native';
+import {Colors} from '../constants/Color';
+import {Dimensions} from '../constants/Dimensions';
+import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
+import {Screens} from '../navigation/ScreenNames';
 
 class HomeScreen extends Component {
   render() {
-
     return (
       <View style={styles.container}>
         <Button
-          title={STRINGS.go_to_products}
+          title={CommonLocalizeStrings.go_to_products}
           onPress={() =>
-            this.props.navigation.navigate(SCREENS.product, {
-              message: STRINGS.food_factory,
+            this.props.navigation.navigate(Screens.PRODUCT, {
+              message: CommonLocalizeStrings.food_factory,
             })
           }
         />
 
         <Button
-          title={STRINGS.go_to_tab}
-          onPress={() => this.props.navigation.navigate(SCREENS.tab)}
+          title={CommonLocalizeStrings.go_to_tab}
+          onPress={() => this.props.navigation.navigate(Screens.TAB)}
         />
       </View>
     );
@@ -30,11 +29,11 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   headerText: {
-    color: COLORS.black,
-    fontSize: DIMENSIONS.large,
+    color: Colors.BLACK,
+    fontSize: Dimensions.LARGE,
     justifyContent: 'center',
     textAlign: 'center',
-    marginBottom: DIMENSIONS.standard,
+    marginBottom: Dimensions.STANDARD,
   },
   container: {
     flex: 1,

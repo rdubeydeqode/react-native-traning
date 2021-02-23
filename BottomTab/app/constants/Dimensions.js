@@ -1,7 +1,7 @@
-export const DIMENSIONS = {
-  micro: 5,
-  mini: 10,
-  small: 15,
-  standard: 20,
-  large: 40,
+export const Dimensions = {
+  MICRO: 5,
+  MINI: 10,
+  SMALL: 15,
+  STANDARD: 20,
+  LARGE: 40,
 };

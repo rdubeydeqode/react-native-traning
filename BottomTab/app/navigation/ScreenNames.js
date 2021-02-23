@@ -1,11 +1,11 @@
-export const SCREENS = {
-  home: 'Home',
-  list: 'List',
-  product: 'Product',
-  tab_one_screen_1: 'TabOneScreen1',
-  tab_one_screen_2: 'TabOneScreen2',
-  tab_one_screen_3: 'TabOneScreen3',
-  tab_two_screen_1: 'TabTwoScreen1',
-  tab_two_screen_2: 'TabTwoScreen2',
-  tab: 'Tab',
+export const Screens = {
+  HOME: 'Home',
+  LIST: 'List',
+  PRODUCT: 'Product',
+  TAB_ONE_SCREEN_1: 'TabOneScreen1',
+  TAB_ONE_SCREEN_2: 'TabOneScreen2',
+  TAB_ONE_SCREEN_3: 'TabOneScreen3',
+  TAB_TWO_SCREEN_1: 'TabTwoScreen1',
+  TAB_TWO_SCREEN_2: 'TabTwoScreen2',
+  TAB: 'Tab',
 };

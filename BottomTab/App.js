@@ -2,8 +2,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {STRINGS} from './app/constants/String';
-import {SCREENS} from './app/navigation/ScreenNames';
+import {CommonLocalizeStrings} from './app/localization/CommonLocalizationStrings';
+import {Screens} from './app/navigation/ScreenNames';
 import HomeScreen from './app/screens/HomeScreen';
 import ListScreen from './app/screens/ListScreen';
 import ProductScreen from './app/screens/ProductScreen';
@@ -20,10 +20,10 @@ function TabOneStack() {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={SCREENS.TabOneScreen1}>
-      <Stack.Screen name={SCREENS.tab_one_screen_1} component={TabOneScreen1} />
-      <Stack.Screen name={SCREENS.tab_one_screen_2} component={TabOneScreen2} />
-      <Stack.Screen name={SCREENS.tab_one_screen_3} component={TabOneScreen3} />
+      initialRouteName={Screens.TAB_ONE_SCREEN_1}>
+      <Stack.Screen name={Screens.TAB_ONE_SCREEN_1} component={TabOneScreen1} />
+      <Stack.Screen name={Screens.TAB_ONE_SCREEN_2} component={TabOneScreen2} />
+      <Stack.Screen name={Screens.TAB_ONE_SCREEN_3} component={TabOneScreen3} />
     </Stack.Navigator>
   );
 }
@@ -32,10 +32,10 @@ function TabTwoStack() {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={SCREENS.TabTwoScreen1}>
-      <Stack.Screen name={SCREENS.tab_two_screen_1} component={TabTwoScreen1} />
-      <Stack.Screen name={SCREENS.tab_two_screen_2} component={TabTwoScreen2} />
-      <Stack.Screen name={SCREENS.tab_one_screen_3} component={TabOneScreen3} />
+      initialRouteName={Screens.TAB_TWO_SCREEN_1}>
+      <Stack.Screen name={Screens.TAB_TWO_SCREEN_1} component={TabTwoScreen1} />
+      <Stack.Screen name={Screens.TAB_TWO_SCREEN_2} component={TabTwoScreen2} />
+      <Stack.Screen name={Screens.TAB_ONE_SCREEN_3} component={TabOneScreen3} />
     </Stack.Navigator>
   );
 }
@@ -43,8 +43,8 @@ function TabTwoStack() {
 function BottomTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name={STRINGS.tab_1} component={TabOneStack} />
-      <Tab.Screen name={STRINGS.tab_2} component={TabTwoStack} />
+      <Tab.Screen name={CommonLocalizeStrings.tab_1} component={TabOneStack} />
+      <Tab.Screen name={CommonLocalizeStrings.tab_2} component={TabTwoStack} />
     </Tab.Navigator>
   );
 }
@@ -54,10 +54,10 @@ class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name={SCREENS.home} component={HomeScreen} />
-          <Stack.Screen name={SCREENS.list} component={ListScreen} />
-          <Stack.Screen name={SCREENS.product} component={ProductScreen} />
-          <Stack.Screen name={SCREENS.tab} component={BottomTabs} />
+          <Stack.Screen name={Screens.HOME} component={HomeScreen} />
+          <Stack.Screen name={Screens.LIST} component={ListScreen} />
+          <Stack.Screen name={Screens.PRODUCT} component={ProductScreen} />
+          <Stack.Screen name={Screens.TAB} component={BottomTabs} />
         </Stack.Navigator>
       </NavigationContainer>
     );

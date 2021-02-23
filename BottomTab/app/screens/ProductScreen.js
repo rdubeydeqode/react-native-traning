@@ -1,10 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import {COLORS} from '../constants/Color';
-import {DIMENSIONS} from '../constants/Dimensions';
-import {STRINGS} from '../constants/String';
-import {SCREENS} from '../navigation/ScreenNames';
+import {Colors} from '../constants/Color';
+import {Dimensions} from '../constants/Dimensions';
+import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
+import {Screens} from '../navigation/ScreenNames';
 
 const ProductScreen = () => {
   const navigation = useNavigation();
@@ -14,18 +14,22 @@ const ProductScreen = () => {
       <Text style={styles.messageText}>Message</Text>
       <View style={styles.button}>
         <Button
-          title={STRINGS.food}
+          title={CommonLocalizeStrings.food}
           onPress={() =>
-            navigation.navigate(SCREENS.list, {type: STRINGS.food})
+            navigation.navigate(Screens.LIST, {
+              type: CommonLocalizeStrings.food,
+            })
           }
         />
       </View>
 
       <View style={styles.button}>
         <Button
-          title={STRINGS.beverage}
+          title={CommonLocalizeStrings.beverage}
           onPress={() =>
-            navigation.navigate(SCREENS.list, {type: STRINGS.beverage})
+            navigation.navigate(Screens.LIST, {
+              type: CommonLocalizeStrings.beverage,
+            })
           }
         />
       </View>
@@ -38,12 +42,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.green,
+    backgroundColor: Colors.GREEN,
   },
   messageText: {
-    color: COLORS.black,
-    fontSize: DIMENSIONS.standard,
-    backgroundColor: COLORS.white,
+    color: Colors.BLACK,
+    fontSize: Dimensions.STANDARD,
+    backgroundColor: Colors.WHITE,
   },
   button: {
     flex: 1,
