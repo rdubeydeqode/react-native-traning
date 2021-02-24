@@ -1,32 +1,19 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  SectionList,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {SafeAreaView, SectionList, StyleSheet, Text} from 'react-native';
 import {Colors} from '../constants/Color';
 import {Dimensions} from '../constants/Dimensions';
 import {MockDataSectionList} from '../mock/ListMockData';
-
-const Item = ({title}) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
 
 const SectionListScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
         sections={MockDataSectionList}
-        keyExtractor={(item, index) => item + index}
-        renderItem={({item}) => <Item title={item} />}
-        renderSectionHeader={({section: {title}}) => (
-          <Text style={styles.header}>{title}</Text>
+        renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+        renderSectionHeader={({section}) => (
+          <Text style={styles.sectionHeader}>{section.title}</Text>
         )}
+        keyExtractor={(index) => index}
       />
     </SafeAreaView>
   );
@@ -35,20 +22,20 @@ const SectionListScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: Dimensions.SMALL,
+    backgroundColor: Colors.GREEN,
+  },
+  sectionHeader: {
+    paddingVertical: Dimensions.MICRO,
+    padding: Dimensions.MINI,
+    fontSize: Dimensions.LARGE,
+    fontWeight: 'bold',
+    color: Colors.BLACK,
+    backgroundColor: Colors.GREEN,
   },
   item: {
-    backgroundColor: Colors.GREEN,
-    padding: Dimensions.SMALL,
-    marginVertical: Dimensions.SMALL,
-  },
-  header: {
-    fontSize: Dimensions.LARGE,
-    backgroundColor: Colors.BLACK,
-  },
-  title: {
+    padding: Dimensions.MINI,
     fontSize: Dimensions.SMALL,
+    height: Dimensions.LARGE,
   },
 });
 

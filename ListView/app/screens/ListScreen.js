@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {Colors} from '../constants/Color';
 import {Dimensions} from '../constants/Dimensions';
-import {MockData} from '../mock/ListMockData';
+import {MockDataList} from '../mock/ListMockData';
 
 const Item = ({title}) => (
   <View style={styles.item}>
@@ -23,7 +23,7 @@ const ListScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={MockData}
+        data={MockDataList}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
