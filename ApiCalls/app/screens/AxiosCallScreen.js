@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
 import React, {useState} from 'react';
 import {
   ActivityIndicator,
@@ -14,17 +14,20 @@ import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
 import {getUrl} from '../networkApi/Url';
 
 const AxiosCallScreen = () => {
-  const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   const callApi = () => {
     setLoading(true);
-    fetch(getUrl)
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+    axios.get(getUrl).then(
+      (response) => {
+        setData(response.data);
+        setLoading(false);
+      },
+      (error) => {
+        setLoading(false);
+      },
+    );
   };
 
   return (
