@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Button,
@@ -15,9 +15,17 @@ import {Screens} from '../navigation/ScreenNames';
 import {getUrl} from '../networkApi/Url';
 
 const HomeScreen = () => {
+  //used navigation Hook
   const navigation = useNavigation();
+
+  //used useState Hook
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
+
+  //used useEffect Hook
+  useEffect(() => {
+    callApi();
+  }, []);
 
   const callApi = () => {
     setLoading(true);
@@ -39,8 +47,8 @@ const HomeScreen = () => {
       ) : null}
 
       <Button
-        title={CommonLocalizeStrings.go_to_axios_call}
-        onPress={() => navigation.navigate(Screens.AXIOS)}
+        title={CommonLocalizeStrings.go_to_custom_hook}
+        onPress={() => navigation.navigate(Screens.CUSTOM_HOOKS)}
       />
 
       <Button title={CommonLocalizeStrings.get_call} onPress={callApi} />

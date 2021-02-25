@@ -1,5 +1,5 @@
 export const Screens = {
   HOME: 'Home',
-  AXIOS: 'Axios',
+  CUSTOM_HOOKS: 'customHooks',
   PRODUCT: 'Product',
 };
