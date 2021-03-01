@@ -1,15 +1,24 @@
-# react-native-traning
+# List Building
 
-- Navigating Users Between Screens. Nested screen stack. Passing params. How can we use navigation through the hook. What are the use cases of navigation (Expecting wonderful research)?
+# Keys VS Refs
 
-- List Building - With Style. How can we optimize the List? Refs vs keys
+The names of these attributes speak for themselves: both keys and refs are used to identify particular elements in the DOM, however their purposes are different.
 
-- State management in react-native. Complete redux implementation (Prefer in-depth).
+# Keys
 
-- React hooks. The use case for each react hook. Custom hook
+Keys React are utilised to identify specific Virtual DOM Elements that have changed.
 
-- Context APIs
+# Refs
 
-- React Memo.
+Similarly to keys refs are added to elements in the form of attributes.
+Usually props are the way for parent components interact with their children. However in some cases you might need to modify a child without re-rendering it with new props. That’s exactly when refs attribute comes to use.
 
-- HTTP/HTTPS requests in react-native. Multiple ways of API implementations. with and without API libs with pros and cons. Retry, Timeout, and Cancel API call mechanism.
+Refs can be created in 3 ways:
+
+-String Type
+
+-Callback Function
+
+-CreateRef() method
+
+-String Refs
