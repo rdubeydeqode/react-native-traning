@@ -19,10 +19,11 @@ const AutoCompleteSearchBox = ({
   searchResults,
 }) => {
   let i = 0;
+
   const [lastSearchText, setLastSearchText] = useState('');
   const [searchText, setSearchText] = useState('');
 
-  const setLastWord = (text) => {
+  const getLastSearchWord = (text) => {
     let lastWord = getLastWord(text);
     setLastSearchText(lastWord);
 
@@ -37,7 +38,7 @@ const AutoCompleteSearchBox = ({
   const searchRow = (item) => {
     return (
       <TouchableOpacity
-        style={styles.resultItem}
+        style={styles.searchResultItem}
         onPress={() => {
           modifySearchString(item);
         }}>
@@ -61,16 +62,16 @@ const AutoCompleteSearchBox = ({
   return (
     <View style={styles.container}>
       <TextInput
+        style={styles.searchBox}
         placeholder={CommonLocalizeStrings.search}
         placeholderTextColor={Colors.BLACK}
         value={searchText}
         onFocus={() => {
           onSearchBoxPressed(lastSearchText);
         }}
-        style={styles.searchBox}
         onChangeText={(text) => {
-          onTextChange(setLastWord(text));
           setSearchText(text);
+          onTextChange(getLastSearchWord(searchText));
         }}
       />
 
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: Dimensions.LARGE,
   },
-  resultItem: {
+  searchResultItem: {
     width: '100%',
     justifyContent: 'center',
     height: Dimensions.LARGE,

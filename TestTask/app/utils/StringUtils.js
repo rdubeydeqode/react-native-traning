@@ -1,5 +1,5 @@
-export function getLastWord(text) {
-  let lastWord = text.split(' ').pop();
+export function getLastWord(sentence) {
+  let lastWord = sentence.split(' ').pop();
   return lastWord;
 }
 
