@@ -1,0 +1,123 @@
+import React, {useState} from 'react';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {Colors} from '../constants/Color';
+import {Dimensions} from '../constants/Dimensions';
+import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
+import {getLastWord, replaceLastWord} from '../utils/StringUtils';
+
+const AutoCompleteSearchBox = ({
+  onTextChange,
+  onSearchBoxPressed,
+  isLoading,
+  searchResults,
+}) => {
+  let i = 0;
+  const [lastSearchText, setLastSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');
+
+  const setLastWord = (text) => {
+    let lastWord = getLastWord(text);
+    setLastSearchText(lastWord);
+
+    return lastWord;
+  };
+
+  const modifySearchString = (selectedText) => {
+    let modifiedSearchString = replaceLastWord(selectedText, searchText);
+    setSearchText(modifiedSearchString);
+  };
+
+  const searchRow = (item) => {
+    return (
+      <TouchableOpacity
+        style={styles.resultItem}
+        onPress={() => {
+          modifySearchString(item);
+        }}>
+        {isCurrentWordMatchesSuggestion(item) ? (
+          <Text style={styles.selectedText}>{item}</Text>
+        ) : (
+          <Text>{item}</Text>
+        )}
+      </TouchableOpacity>
+    );
+  };
+
+  const isCurrentWordMatchesSuggestion = (suggestionText) => {
+    if (suggestionText == lastSearchText) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        placeholder={CommonLocalizeStrings.search}
+        placeholderTextColor={Colors.BLACK}
+        value={searchText}
+        onFocus={() => {
+          onSearchBoxPressed(lastSearchText);
+        }}
+        style={styles.searchBox}
+        onChangeText={(text) => {
+          onTextChange(setLastWord(text));
+          setSearchText(text);
+        }}
+      />
+
+      {isLoading && (
+        <FlatList
+          data={searchResults}
+          style={styles.searchResultsContainer}
+          keyExtractor={() => (i++).toString()}
+          renderItem={({item}) => searchRow(item)}
+        />
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+  },
+  searchBox: {
+    width: '100%',
+    height: Dimensions.LARGE,
+    fontSize: Dimensions.STANDARD,
+    borderRadius: Dimensions.MINI,
+    borderColor: Colors.GREEN,
+    color: Colors.BLACK,
+    backgroundColor: Colors.WHITE,
+    borderWidth: Dimensions.MICRO,
+    paddingLeft: Dimensions.SMALL,
+  },
+  searchResultsContainer: {
+    width: '100%',
+    backgroundColor: Colors.WHITE,
+    position: 'absolute',
+    top: Dimensions.LARGE,
+  },
+  resultItem: {
+    width: '100%',
+    justifyContent: 'center',
+    height: Dimensions.LARGE,
+    borderBottomColor: Colors.SILVER,
+    borderBottomWidth: Dimensions.MICRO,
+    paddingLeft: Dimensions.SMALL,
+  },
+  selectedText: {
+    color: Colors.RED,
+  },
+});
+
+export default AutoCompleteSearchBox;
