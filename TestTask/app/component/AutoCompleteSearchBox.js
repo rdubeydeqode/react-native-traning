@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -7,10 +7,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Colors} from '../constants/Color';
-import {Dimensions} from '../constants/Dimensions';
-import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
-import {getLastWord, replaceLastWord} from '../utils/StringUtils';
+import { Colors } from '../constants/Color';
+import { Dimensions } from '../constants/Dimensions';
+import { CommonLocalizeStrings } from '../localization/CommonLocalizationStrings';
+import { getLastWord, replaceLastWord } from '../utils/StringUtils';
+import { debounce } from "lodash";
 
 const AutoCompleteSearchBox = ({
   onTextChange,
@@ -22,6 +23,12 @@ const AutoCompleteSearchBox = ({
 
   const [lastSearchText, setLastSearchText] = useState('');
   const [searchText, setSearchText] = useState('');
+
+  const request = debounce((text) => {
+    onTextChange(getLastSearchWord(text));
+  }, 1000);
+
+  const debouceRequest = useCallback(text =>request(text), []);
 
   const getLastSearchWord = (text) => {
     let lastWord = getLastWord(text);
@@ -36,6 +43,7 @@ const AutoCompleteSearchBox = ({
   };
 
   const searchRow = (item) => {
+    
     return (
       <TouchableOpacity
         style={styles.searchResultItem}
@@ -45,10 +53,15 @@ const AutoCompleteSearchBox = ({
         {isCurrentWordMatchesSuggestion(item) ? (
           <Text style={styles.selectedText}>{item}</Text>
         ) : (
-          <Text>{item}</Text>
-        )}
+            <Text>{item}</Text>
+          )}
       </TouchableOpacity>
     );
+  };
+
+  const onSearchchange = (text) => {
+    setSearchText(text);
+    debouceRequest(text);
   };
 
   const isCurrentWordMatchesSuggestion = (suggestionText) => {
@@ -69,10 +82,7 @@ const AutoCompleteSearchBox = ({
         onFocus={() => {
           onSearchBoxPressed(lastSearchText);
         }}
-        onChangeText={(text) => {
-          setSearchText(text);
-          onTextChange(getLastSearchWord(searchText));
-        }}
+        onChangeText={(text)=>{onSearchchange(text)}}
       />
 
       {isLoading && (
@@ -80,7 +90,7 @@ const AutoCompleteSearchBox = ({
           data={searchResults}
           style={styles.searchResultsContainer}
           keyExtractor={() => (i++).toString()}
-          renderItem={({item}) => searchRow(item)}
+          renderItem={({ item }) => searchRow(item)}
         />
       )}
     </View>
