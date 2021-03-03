@@ -4,5 +4,6 @@ export const CommonLocalizeStrings = new LocalizedStrings({
   // English
   en: {
     search: 'Search...',
+    space: ' ',
   },
 });

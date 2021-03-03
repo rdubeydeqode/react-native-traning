@@ -13,14 +13,7 @@ import {Dimensions} from '../constants/Dimensions';
 import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
 import {getLastWord, replaceLastWord} from '../utils/StringUtils';
 
-const AutoCompleteSearchBox = ({
-  onTextChange,
-  onSearchBoxPressed,
-  isLoading,
-  searchResults,
-}) => {
-  let i = 0;
-
+const AutoCompleteSearchBox = ({onTextChange, searchResults}) => {
   const [lastSearchString, setLastSearchString] = useState('');
   const [searchString, setSearchString] = useState('');
 
@@ -82,18 +75,18 @@ const AutoCompleteSearchBox = ({
         placeholderTextColor={Colors.BLACK}
         value={searchString}
         onFocus={() => {
-          onSearchBoxPressed(lastSearchString);
+          onTextChange(lastSearchString);
         }}
         onChangeText={(text) => {
           onSearchTextChange(text);
         }}
       />
 
-      {isLoading && (
+      {searchResults.length > 0 && (
         <FlatList
           data={searchResults}
           style={styles.searchResultsContainer}
-          keyExtractor={() => (i++).toString()}
+          keyExtractor={(index) => index.toString()}
           renderItem={({item}) => searchRow(item)}
         />
       )}

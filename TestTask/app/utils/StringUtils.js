@@ -1,3 +1,5 @@
+import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
+
 export function getLastWord(sentence) {
   let lastWord = sentence.split(' ').pop();
 
@@ -6,10 +8,13 @@ export function getLastWord(sentence) {
 
 export function replaceLastWord(lastWord, selectedString) {
   let modifiedString =
-    selectedString.substring(0, selectedString.lastIndexOf(' ')) +
-    ' ' +
+    selectedString.substring(
+      0,
+      selectedString.lastIndexOf(CommonLocalizeStrings.space),
+    ) +
+    CommonLocalizeStrings.space +
     lastWord +
-    ' ';
+    CommonLocalizeStrings.space;
 
   return modifiedString;
 }

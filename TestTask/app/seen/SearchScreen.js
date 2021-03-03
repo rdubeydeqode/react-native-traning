@@ -8,27 +8,24 @@ import {
 import AutoCompleteSearchBox from '../component/AutoCompleteSearchBox';
 import {Colors} from '../constants/Color';
 import {Dimensions} from '../constants/Dimensions';
-import {getSuggestions} from '../mockServer/Server';
+import {getSuggestions} from '../services/MockServer';
 
 const SearchScreen = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState();
 
   const searchSuggestions = async (searchKeyword) => {
-    setIsLoading(true);
     getSuggestions(searchKeyword).then(
       (response) => {
         setSearchResults(response);
-        setIsLoading(true);
       },
-      () => {
-        setIsLoading(false);
+      (error) => {
+        setError(error);
       },
     );
   };
 
   const hideSearchList = () => {
-    setIsLoading(false);
     Keyboard.dismiss();
   };
 
@@ -36,11 +33,7 @@ const SearchScreen = () => {
     <TouchableWithoutFeedback onPress={hideSearchList}>
       <View style={styles.container}>
         <AutoCompleteSearchBox
-          isLoading={isLoading}
           searchResults={searchResults}
-          onSearchBoxPressed={(lastSearchText) => {
-            searchSuggestions(lastSearchText);
-          }}
           onTextChange={(lastSearchText) => {
             searchSuggestions(lastSearchText);
           }}
