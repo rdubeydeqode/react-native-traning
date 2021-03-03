@@ -13,7 +13,11 @@ import {Dimensions} from '../constants/Dimensions';
 import {CommonLocalizeStrings} from '../localization/CommonLocalizationStrings';
 import {getLastWord, replaceLastWord} from '../utils/StringUtils';
 
-const AutoCompleteSearchBox = ({onTextChange, searchResults}) => {
+const AutoCompleteSearchBox = ({
+  onTextChange,
+  searchResults,
+  isSuggestionsVisible,
+}) => {
   const [lastSearchString, setLastSearchString] = useState('');
   const [searchString, setSearchString] = useState('');
 
@@ -67,6 +71,17 @@ const AutoCompleteSearchBox = ({onTextChange, searchResults}) => {
     );
   };
 
+  const renderList = () => {
+    return (
+      <FlatList
+        data={searchResults}
+        style={styles.searchResultsContainer}
+        keyExtractor={(index) => index.toString()}
+        renderItem={({item}) => searchRow(item)}
+      />
+    );
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -81,15 +96,7 @@ const AutoCompleteSearchBox = ({onTextChange, searchResults}) => {
           onSearchTextChange(text);
         }}
       />
-
-      {searchResults.length > 0 && (
-        <FlatList
-          data={searchResults}
-          style={styles.searchResultsContainer}
-          keyExtractor={(index) => index.toString()}
-          renderItem={({item}) => searchRow(item)}
-        />
-      )}
+      {isSuggestionsVisible && renderList()}
     </View>
   );
 };

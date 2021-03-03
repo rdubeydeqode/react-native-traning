@@ -12,6 +12,7 @@ import {getSuggestions} from '../services/MockServer';
 
 const SearchScreen = () => {
   const [searchResults, setSearchResults] = useState([]);
+  const [isSuggestionsVisible, setIsSuggestionsVisible] = useState(true);
   const [error, setError] = useState();
 
   const searchSuggestions = async (searchKeyword) => {
@@ -26,6 +27,7 @@ const SearchScreen = () => {
   };
 
   const hideSearchList = () => {
+    setIsSuggestionsVisible(false);
     Keyboard.dismiss();
   };
 
@@ -33,8 +35,10 @@ const SearchScreen = () => {
     <TouchableWithoutFeedback onPress={hideSearchList}>
       <View style={styles.container}>
         <AutoCompleteSearchBox
+          isSuggestionsVisible={isSuggestionsVisible}
           searchResults={searchResults}
           onTextChange={(lastSearchText) => {
+            setIsSuggestionsVisible(true);
             searchSuggestions(lastSearchText);
           }}
         />
