@@ -1,5 +1,6 @@
 export function getLastWord(sentence) {
   let lastWord = sentence.split(' ').pop();
+
   return lastWord;
 }
 
@@ -9,5 +10,6 @@ export function replaceLastWord(lastWord, selectedString) {
     ' ' +
     lastWord +
     ' ';
+
   return modifiedString;
 }

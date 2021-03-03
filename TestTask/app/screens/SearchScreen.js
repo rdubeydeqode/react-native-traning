@@ -14,9 +14,9 @@ const SearchScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
 
-  const searchLocation = async (text) => {
+  const searchSuggestions = async (searchKeyword) => {
     setIsLoading(true);
-    getSuggestions(text).then(
+    getSuggestions(searchKeyword).then(
       (response) => {
         setSearchResults(response);
         setIsLoading(true);
@@ -39,10 +39,10 @@ const SearchScreen = () => {
           isLoading={isLoading}
           searchResults={searchResults}
           onSearchBoxPressed={(lastSearchText) => {
-            searchLocation(lastSearchText);
+            searchSuggestions(lastSearchText);
           }}
           onTextChange={(lastSearchText) => {
-            searchLocation(lastSearchText);
+            searchSuggestions(lastSearchText);
           }}
         />
       </View>
